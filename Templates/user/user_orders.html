@@ -1,0 +1,50 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+    h2 {
+      margin: 40px;  
+    }
+</style>
+
+<center><h2>Your Orders</h2></center>
+<div class="container mt-5">
+    
+
+    {% if user_orders %}
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Card Number</th>
+              <th>Shipping Address</th>
+              <th>CVV</th>
+              <th>Total Price</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in user_orders %}
+              <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.name }}</td>
+                <td>{{ order.email }}</td>
+                <td>{{ order.card_number }}</td>
+                <td>{{ order.shipping_address }}</td>
+                <td>{{ order.cvv }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{ order.created_at }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>No orders found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

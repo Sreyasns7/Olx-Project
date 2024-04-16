@@ -1,0 +1,168 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+  /* Existing styles... */
+
+  .user-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .user-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .user-image {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .user-info {
+    flex-grow: 1;
+  }
+
+  .user-info h5 {
+    margin-bottom: 0;
+  }
+
+  .message-box-container {
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .message-box-container .row {
+    margin: 0;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.327);
+  }
+
+  .col-md-4,
+  .col-md-8 {
+    padding: 0;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+
+  .messages {
+    max-height: 500px; /* Increased max-height for better scrolling */
+    overflow-y: auto;
+    border-bottom: 3px solid #0000005f; /* Border between user list and messages */
+  }
+
+  .message-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .message-box {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    position: relative;
+  }
+
+  .sent .message-box {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+  }
+
+  .received .message-box {
+    background-color: #eaeaea;
+    color: #333;
+    align-self: flex-start;
+  }
+
+  .timestamp {
+    margin-top: 5px;
+    color: #c8c3c3;
+    font-size: 12px;
+    position: relative;
+  }
+
+  .input-group {
+    margin-top: 10px;
+  }
+
+  textarea {
+    border-radius: 5px;
+  }
+  .btn-primary{
+    width: 30%;
+  }
+  .h4{
+    text-align: center;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.301);
+    padding-bottom: 30px;
+    margin-top: 10px;
+  }
+</style>
+
+
+<div class="container mt-4">
+  <div class="row">
+    <!-- Users List (Left Side) -->
+    <div class="col-md-4">
+      <h4 class="h4">Users</h4>
+      <div class="user-list">
+        {% for user_member in user_members %}
+          <div class="user-container" onclick="location.href='{% url 'messaging' user_id=user_member.user_member.id %}'">
+            <img src="{{ user_member.user_image.url }}" alt="User Image" class="user-image" width="40">
+            <div class="user-info">
+              <h5>{{ user_member.user_member.username }}</h5>
+              <p>{{ user_member.user_member.email }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Messaging Section (Right Side) -->
+    <div class="col-md-8">
+      <div class="message-box-container">
+        <div class="row">
+          <div class="col-md-15">
+            <div class="d-flex align-items-center">
+              <div class="ml-3">
+                <h4>{{ recipient.username }}</h4>
+                <p>Email: {{ recipient.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 messages">
+            {% for message in messages %}
+              <div class="message-container {% if message.sender == request.user %}sent{% else %}received{% endif %}">
+                <div class="message-box">
+                  <p>{{ message.content }}</p>
+                  <small class="timestamp">{{ message.timestamp|date:"F d, Y H:i" }}</small>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <form method="post" action="{% url 'send_message' user_id=recipient.id %}">
+              {% csrf_token %}
+              <div class="input-group">
+                <textarea name="content" rows="2" class="form-control" placeholder="Type your message here" required></textarea>
+                <button type="submit" class="btn btn-primary mt-2">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

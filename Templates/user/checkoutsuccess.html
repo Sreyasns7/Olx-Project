@@ -1,0 +1,46 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+
+.container{
+    margin-top: 100px;
+}
+
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card success-card">
+                <div class="card-body text-center">
+                    <h1><i class="fa fa-check" aria-hidden="true"></i></h1>
+                    <h2>Thank You</h2>
+                    <h2>Your Order Successfully Placed</h2>
+                    <h4>Estimated Delivery Date</h4>
+                    <h4>Sat, Feb 02, 2024</h4>
+
+                    <!-- Feedback form -->
+                    <form class="form" method="post" action="{% url 'checkout_process' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="feedback_content" placeholder="Enter your feedback here" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                    
+                    <!-- Message box -->
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="message alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

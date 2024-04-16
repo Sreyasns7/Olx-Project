@@ -1,0 +1,94 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgba(3, 3, 3, 0.22);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 20px; /* Adjusted for responsiveness */
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive adjustments */
+    @media only screen and (max-width: 600px) {
+        form {
+            max-width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <center><h1>SHIPPING ADDRESS</h1></center>
+
+    <section>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Form fields for user details -->
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            
+            <label for="card_number">Card Number:</label>
+            <input type="text" name="card_number" required>
+            
+            <label for="shipping_address">Shipping Address:</label>
+            <textarea name="shipping_address" required></textarea>
+            
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" required>
+        
+            <button type="submit">Place Order</button>
+          </form>
+    </section>
+</div>
+
+{% endblock %}

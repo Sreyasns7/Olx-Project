@@ -1,0 +1,88 @@
+{% extends "user/user_navbar.html" %}
+{% block content %}
+<style>
+  .form{
+    margin: 86px;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 9px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  
+</style>
+<div class="container mt-4">
+  
+
+  <form method="post" class="form" action="{% url 'edit_user_details' user.id %}">
+    {% csrf_token %}
+    <h2>Edit User Details</h2>
+
+     <!-- Display messages -->
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %} alert-danger {% elif message.tags == 'success' %} alert-success {% endif %}" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+    <div class="form-group ">
+      <label for="username ">Username:</label>
+      <input type="text" class="form-control" name="username" value="{{ user.username }}" required>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="first_name">First Name:</label>
+      <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" required>
+    </div>
+  
+
+    <div class="form-group col-md-6">
+      <label for="last_name">Last Name:</label>
+      <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="address">Address:</label>
+      <textarea class="form-control" name="address">{{ user_member.address }}</textarea>
+    </div>
+  </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="country">Country:</label>
+        <input type="text" class="form-control" name="country" value="{{ user_member.country }}">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="state">State:</label>
+        <input type="text" class="form-control" name="state" value="{{ user_member.state }}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="district">District:</label>
+        <input type="text" class="form-control" name="district" value="{{ user_member.district }}">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="mobile_number">Mobile Number:</label>
+        <input type="text" class="form-control" name="mobile_number" value="{{ user_member.mobile_number }}">
+      </div>
+    </div>
+<center>
+    <button type="submit" class="btn btn-success col-md-4"><i class="fa-solid fa-pen-to-square"></i> EDIT</button>
+  </center>
+  </form>
+</div>
+{% endblock %}

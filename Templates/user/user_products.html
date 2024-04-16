@@ -1,0 +1,69 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+  h2{
+    margin: 50px;
+  }
+</style>
+
+<div class="container">
+  <!-- Display error messages -->
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+      {% elif message.tags == 'success' %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+<center>
+  <h2>Your Products</h2>
+</center>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Year</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in user_products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.year }}</td>
+          <td>${{ product.price }}</td>
+          <td>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <select name="status" class="form-control">
+                <option value="unsold" {% if product.status == 'unsold' %} selected {% endif %}>Unsold</option>
+                <option value="sold" {% if product.status == 'sold' %} selected {% endif %}>Sold</option>
+              </select>
+              <button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-pen"></i> Update</button>
+            </form>
+          </td>
+          <td>
+            <button class="btn btn-success"><a href="{% url 'edit_product' product.id %}" class="text-white"><i class="fa-solid fa-pen-to-square"></i> Edit</a></button>
+            <button class="btn btn-danger"><a href="{% url 'user_delete_product' product.id %}" class="text-white"><i class="fa-solid fa-trash"></i> Delete</a></button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

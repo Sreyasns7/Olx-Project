@@ -1,0 +1,36 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <center><h1>Your Product Orders Details</h1></center>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Buyer Name</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Shipping Address</th>
+                    <th>Created at</th>
+                    <!-- Add more headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in seller_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.email }}</td>
+                    <td>{{order.total_price}}</td>
+                    <td>{{ order.shipping_address }}</td>
+                    <td>{{order.created_at}}</td>
+                    <!-- Add more columns as needed -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

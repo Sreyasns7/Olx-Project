@@ -1,0 +1,52 @@
+{% extends "admin/navbaradmin.html" %}
+
+{% block content %}
+
+  <div class="container mt-5">
+    <h2 class="text-center">Product List</h2>
+
+    {% if products %}
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Seller</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.subcategory.category.name }}</td>
+            <td>{{ product.subcategory.name }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.year }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.seller.username }}</td>
+            <td>
+              {% if user.is_staff %}
+              <form method="post" action="{% url 'delete_product' product.id %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-center">No products available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

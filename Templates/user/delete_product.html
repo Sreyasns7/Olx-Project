@@ -1,0 +1,26 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Delete Product</h2>
+      <p class="card-text">Are you sure you want to delete "{{ product.name }}"?</p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

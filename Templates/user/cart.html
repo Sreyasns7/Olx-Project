@@ -1,0 +1,124 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+
+ <!-- Font Awesome -->
+ <script src="https://kit.fontawesome.com/274ee977b7.js" crossorigin="anonymous"></script>
+
+ <style>
+     h1 {
+         text-align: center;
+         margin-top: 20px;
+         margin-bottom: 30px;
+     }
+
+     .table-container {
+         overflow-x: auto; /* Enable horizontal scrolling */
+     }
+
+     table {
+         width: 90%;
+         border-collapse: collapse;
+         margin-bottom: 30px;
+         margin-left: 90px;
+     }
+
+     th, td {
+         border: 1px solid black;
+         padding: 10px;
+         text-align: center;
+     }
+
+     th {
+         background-color: #00000027;
+     }
+
+     img {
+         max-width: 80px;
+         max-height: 80px;
+         object-fit: cover;
+     }
+
+     .quantity-cell {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+     }
+
+     .btn-quantity {
+         font-size: 16px;
+     }
+
+     .remove-link {
+         color: red;
+     }
+
+     .total-cost {
+         font-size: 18px;
+         font-weight: bold;
+         margin-top: 20px;
+         /* margin-left : 48%; */
+
+     }
+
+     .checkout-btn {
+         margin-left : 20px;
+         
+         padding: 10px 20px;
+         background-color: #28a745;
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         font-size: 16px;
+         text-decoration: none;
+         cursor: pointer;
+         margin-left: 48%;
+     }
+
+     .checkout-btn {
+         background-color: #efdc09;
+         color: black;
+         
+     }
+     
+ </style>
+
+<h1>CART <i class="fa-solid fa-cart-shopping"></i></h1>
+<div class="container-fluid table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Price</th>
+                <!-- <th>Quantity</th> -->
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td><img src="{{ item.user_product.image.url }}" alt=""></td>
+                <td>{{ item.user_product.description }}</td>
+                <td>${{ item.user_product.price }}</td>
+                <!-- <td class="quantity-cell">
+                    <a href="{% url 'decrement' item.user_product.id %}"><i class='fas fa-minus'></i></a>
+                    {{ item.quantity }}
+                    <a href="{% url 'increment' item.user_product.id %}"><i class='fas fa-plus'></i></a>
+                </td> -->
+                <td><a href="{% url 'cart_remove' item.user_product.id %}" class="remove-link"><i class="fa-solid fa-trash"></i> Remove</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="5">{% for message in messages %}{{ message }}{% endfor %}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<center>
+<p class="total-cost">Total Cost: ₹{{ total_price }}</p>
+</center>
+
+<a href="{% url 'place_order' %}" class="checkout-btn">Place order</a>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "admin/navbaradmin.html" %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h2 class="text-center">User Feedback</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Created At</th>
+                    <th>Feedback Message</th>
+                    <!-- <th>Product Name</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.user.username }}</td>
+                    <td>{{ feedback.created_at }}</td>
+                    <td>{{ feedback.content }}</td>
+                    <!-- <td>{{ feedback.product.name }}</td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

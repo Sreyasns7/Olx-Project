@@ -1,0 +1,64 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+  /* Style adjustments */
+  .card {
+    margin-bottom: 20px; /* Add some margin between cards */
+    margin-left: 30px;
+  }
+
+  .card-img-top {
+    max-height: 200px; /* Limit the maximum height of the product images */
+    object-fit: cover; /* Ensure the image covers the entire space */
+  }
+
+  .card-title {
+    text-align: center;
+    margin-bottom: 10px; /* Add some space below the card title */
+  }
+
+  .card-text {
+    margin-bottom: 5px; /* Add some space below the card text */
+  }
+  h2{
+    margin: 50px;
+  }
+</style>
+
+<div class="container-fluid">
+  <h2 class="text-center">{{ subcategory.name }} Products</h2>
+
+  <!-- <h1>Product Search</h1>
+  <form method="GET" action="{% url 'product_search' %}">
+      <input type="text" name="q" placeholder="Search by product name or subcategory">
+      <button type="submit">Search</button>
+  </form>
+  <hr> -->
+  
+
+  <div class="row">
+    {% for product in products %}
+      {% if product.seller != request.user %}
+        <div class="col-md-4">
+          <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }} Image">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <p class="card-text">Year: {{ product.year }}</p>
+              <p class="card-text">Price: ${{ product.price }}</p>
+              <a href="{% url 'messaging' user_id=product.seller.id %}" class="btn btn-primary btn-block">Message</a>
+              <!-- Add to Cart Form -->
+              <form action="{% url 'add_to_cart' product.id %}" method="post" class="mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-block">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

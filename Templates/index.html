@@ -1,0 +1,299 @@
+{% extends "navbar.html" %}
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+
+<style>
+    body {
+        background: #f8f9fb;
+        font-family: "Euclid Circular A", "Poppins";
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    footer {
+        padding-bottom: 20px;
+        background: rgb(185, 182, 182);
+        color: black;
+        border-top: 5px solid black;
+    }
+
+    footer article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 50px 40px;
+        margin: 20px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #773ecb, #2663ff);
+    }
+
+    footer article h2 {
+        font-weight: 400;
+        color: rgb(255 255 255 / 70%);
+    }
+
+    footer article button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 40px 0 44px;
+        width: 100%;
+        background: gray;
+        border: 1px solid white;
+        border-radius: 30px;
+        color: whitesmoke;
+        font-family: inherit;
+        font-size: 18px;
+    }
+
+    footer section {
+        padding: 0 50px;
+    }
+
+    section.top {
+        padding-top: 30px;
+        margin-bottom: 48px;
+    }
+
+    section.top img {
+        display: block;
+        height: 60px;
+        margin: 0 0 30px;
+        width: 100px;
+        border: 2px solid white;
+        border-radius: 8px;
+    }
+
+    section.top ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 480px) {
+        footer article button {
+            width: 70%;
+        }
+
+        section.top ul {
+            padding-right: 10%;
+        }
+    }
+
+    @media (min-width: 600px) {
+        footer article {
+            flex-direction: row;
+            min-height: 140px;
+            margin: 20px;
+            padding: 30px 50px 30px;
+        }
+
+        footer article button {
+            width: auto;
+            padding: 0 20px 0 24px;
+        }
+
+        section.top ul {
+            grid-template-columns: repeat(4, 1fr);
+            padding-right: 0;
+        }
+    }
+
+    section.top ul li a {
+        display: block;
+        margin-bottom: 10px;
+        color: gray;
+    }
+
+    section.top h3 {
+        color: black;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    section.bottom {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 4px solid black;
+        color: white;
+        font-size: 20px;
+        padding-left: 45%;
+        background-color: #1a2744;
+    }
+
+    /* Additional styling for the about section */
+    #about {
+        padding: 80px 0;
+    }
+
+    #about .titleUnderline {
+        border-bottom: 2px solid #1a2744;
+        width: 150px;
+    }
+
+    #about p {
+        margin-bottom: 20px;
+    }
+
+    .container1 {
+        text-align: center; /* Align content to the center */
+        margin-top: 50px; /* Add some top margin */
+    }
+
+    .container1 img {
+        max-width: 100%; /* Make sure the image doesn't exceed its container's width */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 10px; /* Add some border radius for a rounded appearance */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+
+/* For screens smaller than 600px (mobile devices) */
+@media (max-width: 600px) {
+    .container1 {
+        margin-top: 20px; /* Reduce top margin */
+    }
+
+    section.top {
+        padding-top: 20px; /* Reduce top padding */
+    }
+
+    section.top img {
+        margin-bottom: 20px; /* Reduce bottom margin of images */
+    }
+
+    section.top ul {
+        grid-template-columns: 1fr; /* Display list items in a single column */
+        gap: 20px; /* Reduce the gap between list items */
+    }
+
+    footer article,
+    footer section {
+        padding: 20px; /* Reduce padding for footer sections */
+    }
+
+    footer article {
+        margin-bottom: 20px; /* Add bottom margin to footer articles */
+    }
+
+    footer article button {
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 16px; /* Reduce button font size */
+    }
+
+    section.bottom {
+        padding-left: 20px; /* Adjust left padding for footer bottom section */
+    }
+}
+
+
+.fa-twitter {
+            color: rgb(0, 153, 255);
+        }
+
+        .fa-instagram {
+            color: palevioletred;
+        }
+
+
+        .fa-facebook-f {
+            color: blue;
+        }
+
+</style>
+{% load static %}
+
+
+
+<section>
+    <div class="container1">
+    <img src="{% static 'images/olx img.png' %}" alt="">
+</div>
+</section>
+
+<!-- About Us Section -->
+<section id="about">
+    <div class="container">
+        <div class="row gy-lg-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="titleUnderline pt-3 pb-5">
+                    <h2 class="position-relative d-inline-block ms-3">About Us</h2>
+                </div>
+                <p class="lead text-muted">The OLX marketplace is a platform for buying and selling services and goods such as electronics, fashion items, furniture, household goods, cars and bikes.</p>
+                <p class="fs-4">OLX Group is a Dutch-domiciled online market place headquartered in Amsterdam.
+                     The OLX consumer brand originated as OnLine eXchange in 2006. OLX Group is owned by Prosus, 
+                    the international assets division of Naspers.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/olx about.jpg' %}" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of About Us Section -->
+
+<br>
+
+<!-- Footer Section -->
+<footer>
+    <article>
+        <h2>Try the OLX App.</h2>
+        <button>
+            <!-- <p>Sign up free</p> -->
+            <a href="{% url 'registration_view' %}" style="color: #f8f9fb; text-decoration: none;"> Sign Up</a>
+        </button>
+    </article>
+
+    <section class="top">
+        <img src="{% static 'images/logo.png' %}" />
+        <ul>
+            <li>
+                <h3>POPULAR LOCATIONS</h3>
+                <a>Kolkata</a>
+                <a>Mumbai</a>
+                <a>Chennai</a>
+                <a>Pune</a>
+            </li>
+            <li>
+                <h3>TRENDING LOCATIONS</h3>
+                <a>Bhubaneshwar</a>
+                <a>Hyderabad</a>
+                <a>Chandigarh</a>
+                <a>Nashik</a>
+            </li>
+            <li>
+                <h3>ABOUT US</h3>
+                <a>Contact Us</a>
+
+                <a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+
+
+            </li>
+            <li>
+                <h3>OLX</h3>
+                <a>Blog</a>
+                <a>Help</a>
+                <a>Sitemap</a>
+                <a>Legal & Privacy information</a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="bottom">© 2024 OLX</section>
+</footer>
+<!-- End of Footer Section -->
+
+{% endblock content %}

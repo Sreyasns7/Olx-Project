@@ -1,0 +1,27 @@
+<!-- user/user_list.html -->
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+
+<style>
+    .container{
+        position: absolute;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row">
+        {% for user in messaged_users %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ user.user_image.url }}" alt="Profile Image" class="rounded-circle mb-3" width="100">
+                    <h5 class="card-title">{{ user.user_member.username }}</h5>
+                    <p class="card-text">Email: {{ user.user_member.email }}</p>
+                    <!-- <a href="{% url 'messaging' user_id=user.user_member.id %}" class="btn btn-primary">Message</a> -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

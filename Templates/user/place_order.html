@@ -1,0 +1,58 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <!-- Display success messages -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% elif message.tags == 'success' %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Place Order</h2>
+            
+            <form method="post" action="{% url 'place_order' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="shipping_address" class="form-label">Shipping Address:</label>
+                    <textarea class="form-control" name="shipping_address" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="card_number" class="form-label">Card Number:</label>
+                    <input type="text" class="form-control" name="card_number" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cvv" class="form-label">CVV:</label>
+                    <input type="text" class="form-control" name="cvv" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

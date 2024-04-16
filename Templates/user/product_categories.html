@@ -1,0 +1,62 @@
+{% extends 'user/user_navbar.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+  .category-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .category-item {
+    border: 2px solid #e11414;
+    padding: 15px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+
+  .category-item:hover {
+    box-shadow: 0 0 100px rgba(194, 27, 27, 0.1);
+  }
+
+  .category-name {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  /* Adjust the size of the images */
+  .category-item img {
+    max-width: 80%;
+    height: auto;
+    width: 80%; /* Force images to take up 100% of the container's width */
+    max-height: 150px; /* Set a maximum height to maintain aspect ratio */
+  }
+  h2{
+    margin: 50px;
+  }
+  
+</style>
+
+<div class="container mt-4">
+  <center>
+    <h2>Product Categories</h2>
+  </center>
+  <div class="row">
+    {% for category in categories %}
+    <div class="col-md-4 mb-4">
+      <a href="{% url 'subcategories_by_category' category.id %}" class="category-link">
+        <div class="category-item">
+          {% if category.image %}
+          <img src="{{ category.image.url }}" alt="{{ category.name }}" class="img-fluid">
+          {% else %}
+          <!-- Provide a default image or placeholder if the category has no image -->
+          <img src="{% static 'path/to/default/image.jpg' %}" alt="{{ category.name }}" class="img-fluid">
+          {% endif %}
+          <p class="category-name">{{ category.name }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

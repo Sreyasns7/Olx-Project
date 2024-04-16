@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <script src="https://kit.fontawesome.com/274ee977b7.js" crossorigin="anonymous"></script>
+
+    <style>
+    .bg-light {
+    background-color: #c1c5c7 !important;
+    padding: 25px;
+}
+.navbar {
+        background-color: #FFF;
+        box-shadow: 0px 3px 9px rgba(216, 70, 70, 0.955);
+      }
+
+      .nav-link:hover {
+        color: #ff6600; /* OLX orange color on hover */
+        border-bottom: 2px solid rgb(216, 53, 53);
+        box-shadow: 0px 3px 9px rgba(216, 70, 70, 0.955);
+        border-radius: 20px;
+        background-color: rgb(221, 218, 218);
+
+      }
+
+      .navbar-brand {
+        font-size: 30px;
+        font-weight: bold;
+        color: #002f34; /* OLX blue color */
+        margin-left: 40px;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+      }
+      .navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, .5);
+    font-size: 18px;
+}
+.p{
+  font-size: 13px;
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="#">OLX <span class="p">India</span></a>
+
+    <!-- Toggler/collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_user_details' user.id %}"><i class="fa-solid fa-pen-to-square" style="color: green;"></i> Edit Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_product' %}"><i class="fa-solid fa-cart-shopping" style="color: rgb(0, 157, 255);"></i> Sell Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'product_categories' %}">Product Category</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_products' %}">My Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'reset_password' %}"><i class="fa-solid fa-arrows-rotate" style="color: rgb(165, 165, 9);"></i> RESET Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'messaging' user.id %}"><i class="fa-solid fa-comment" style="color: blue;"></i> Chats
+                    <!-- <i class="fa fa-bell" aria-hidden="true" alt="Notification Icon"></i> -->
+                    {% if unread_messages_count > 0 %}
+                    <span class="notification-badge">{{ unread_messages_count }}</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" href="{% url 'cart_view' %}">Cart <span class="badge badge-info">{{ total_items }}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'seller_order_details' %}">User Product Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_orders' %}">Order Details</a>
+            </li>
+
+            <li class="nav-item">
+                <form class="form-inline" method="GET" action="{% url 'product_search' %}">
+                    <div class="input-group">
+                        <!-- <input  type="hidden" class="form-control" name="subcategory" value="{{ subcategory.name }}" placeholder="Search by product name"> -->
+                        <input type="text" class="form-control" name="q" placeholder="Search by product name">
+                        <input type="hidden" class="form-control" name="subcategory" value="{{ subcategory.name }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i> </button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}" style="color: red;"><i class="fa-solid fa-right-to-bracket" ></i> LOGOUT</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Add your page content here -->
+<!-- FOOTER  -->
+<div class="card text-center">
+  <div class="card-body bg-dark fixed-bottom">
+  <p class="card-text text-light">@ OLX</p>
+  </div> 
+  </div>
+  <!-- FOOTER ENDS  -->  
+
+<!-- Bootstrap JS and jQuery scripts (add them at the end of the body) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

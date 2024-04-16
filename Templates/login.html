@@ -1,0 +1,122 @@
+{% extends "navbar.html" %}
+{% block content %}
+<style>
+    .login-box {
+        width: 400px;
+        height: 450px;
+        background: rgb(237, 239, 239);
+        margin: 150px auto;
+        border-radius: 6px;
+        box-shadow: 10px 5px 10px #37d7e0, -5px -5px 10px #ffffff;
+    }
+
+    img {
+        width: 110px;
+        height: 110px;
+        position: relative;
+        top: -50px;
+        left: 35%;
+    }
+
+    h2 {
+        margin: -25px 0 20px 0;
+        text-align: center;
+        color: #0f0e0e;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    form {
+        margin-left: 40px;
+    }
+
+    input {
+        display: block;
+        width: 80%;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-family: sans-serif;
+        background: transparent;
+        font-size: 16px;
+        border-radius: 25px;
+        text-shadow: 1px 1px 0 #fff;
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+    }
+
+    button {
+        width: 87%;
+        border: none;
+        height: 35px;
+        border-radius: 25px;
+        background: rgb(146, 197, 219);
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: -5px -5px 20px rgb(224, 217, 217), 5px 5px 20px #babecc;
+        outline: none;
+        border-color: #0f0e0e;
+    }
+
+    input:focus {
+        box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+    }
+
+    button:active {
+        box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+    }
+
+    .message-box {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .error-message {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+
+    .success-message {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+    }
+    
+    
+</style>
+{% load static %}
+
+<div class="login-box">
+    <h2>Login Form</h2>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="message-box {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Username" id="username" name='uname' />
+        <input type="password" placeholder="Password" id="password" name='upass' />
+        <button type="submit">Sign In</button><br><br>
+        <a href="{% url 'registration_view' %}">Register</a><br>
+    </form>
+    <br />
+    
+
+<!-- FOOTER  -->
+<div class="card text-center">
+    <div class="card-body bg-dark fixed-bottom">
+    <p class="card-text text-light">@ OLX</p>
+    </div> 
+    </div>
+    <!-- FOOTER ENDS  -->   
+    </section>
+
+{% endblock content %}

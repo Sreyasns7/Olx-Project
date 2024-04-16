@@ -1,0 +1,39 @@
+{% extends 'user/user_navbar.html' %}
+
+{% block content %}
+<style>
+    a {
+        color: aliceblue;
+    }
+
+    .card {
+        max-width: 400px; /* Adjust the max-width as needed */
+        margin: 0 auto; /* Center the card on the page */
+        margin-top: 50px; /* Add top margin for spacing */
+    }
+
+    .btn {
+        width: 100%; /* Make the button full-width */
+        margin-top: 15px; /* Add top margin for spacing */
+    }
+    h2{
+        text-align: center;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Order Details</h2>
+        <p class="card-text"><strong>Name:</strong> {{ order.name }}</p>
+        <p class="card-text"><strong>Email:</strong> {{ order.email }}</p>
+        <p class="card-text"><strong>Card Number:</strong> {{ order.card_number }}</p>
+        <p class="card-text"><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+        <p class="card-text"><strong>CVV:</strong> {{ order.cvv }}</p>
+        <p class="card-text"><strong>Total Price:</strong> ₹{{ order.total_price }}</p>
+        <p class="card-text"><strong>Created At:</strong> {{ order.created_at }}</p>
+        <button class="btn btn-success"><a href="{% url 'checkout_process' %}">Confirm Order</a></button>
+    </div>
+</div>
+
+{% endblock %}

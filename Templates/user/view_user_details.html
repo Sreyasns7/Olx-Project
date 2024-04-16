@@ -1,0 +1,22 @@
+{% extends "user/user_navbar.html" %}
+{% block content %}
+<center>
+<div class="container mt-4">
+  <div class="card" style="max-width: 400px;">
+    <div class="card-body">
+      <h2 class="card-title">User Details</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+        <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>Address:</strong> {{ user_member.address }}</li>
+        <li class="list-group-item"><strong>Country:</strong> {{ user_member.country }}</li>
+        <li class="list-group-item"><strong>State:</strong> {{ user_member.state }}</li>
+        <li class="list-group-item"><strong>District:</strong> {{ user_member.district }}</li>
+        <li class="list-group-item"><strong>Mobile Number:</strong> {{ user_member.mobile_number }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</center>
+{% endblock %}
